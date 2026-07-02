@@ -1,0 +1,20 @@
+id: E8-UAH-002
+strategy: user_application_hardening
+title: "Windows Script Host is disabled"
+ism_controls: ["ISM-1623"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Microsoft\Windows Script Host\Settings'
+  key: enabled
+  expected: 0
+remediation: >
+  Disable Windows Script Host to prevent execution of VBScript and JScript:
+  Set HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings\Enabled = 0
+  Or via Group Policy: Computer Configuration > Administrative Templates > Windows Components > Windows Script Host.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://support.microsoft.com/en-us/topic/how-to-disable-windows-scripting-host-7e16e0ef-6dd0-ef10-e2e1-3c2e4bef9d78

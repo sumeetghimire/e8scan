@@ -1,0 +1,20 @@
+id: E8-RAP-001
+strategy: restrict_admin_privileges
+title: "UAC (User Account Control) is enabled"
+ism_controls: ["ISM-1507", "ISM-1508"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+  key: enablelua
+  expected: 1
+remediation: >
+  Enable User Account Control (UAC):
+  Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options > User Account Control: Run all administrators in Admin Approval Mode = Enabled.
+  Or via registry: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System EnableLUA = 1.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/windows/security/identity-protection/user-account-control/user-account-control-overview

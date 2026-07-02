@@ -1,0 +1,28 @@
+id: E8-BKP-002
+strategy: regular_backups
+title: "A backup agent service is present (Windows)"
+ism_controls: ["ISM-1511", "ISM-1515"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: command
+  cmd: >
+    sc query wbengine >nul 2>&1 && echo wbengine ||
+    sc query AcronisAgent >nul 2>&1 && echo AcronisAgent ||
+    sc query BackupExecJobEngine >nul 2>&1 && echo BackupExecJobEngine ||
+    sc query VeeamBackupSvc >nul 2>&1 && echo VeeamBackupSvc ||
+    sc query MSExchangeIS >nul 2>&1 && echo MSExchangeIS ||
+    echo NONE_FOUND
+  shell: true
+  operator: not_contains
+  expected: "NONE_FOUND"
+  timeout: 30
+remediation: >
+  No known backup agent service was detected. Ensure a backup solution is in place:
+  - Windows Server Backup (wbengine): built-in, configure via wbadmin
+  - Veeam Backup & Replication: enterprise-grade, supports off-site replication
+  - Acronis: endpoint backup with cloud options
+  Backups must be tested regularly and stored offline or off-site (3-2-1 rule).
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

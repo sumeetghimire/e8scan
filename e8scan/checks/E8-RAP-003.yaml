@@ -1,0 +1,18 @@
+id: E8-RAP-003
+strategy: restrict_admin_privileges
+title: "LAPS (Local Administrator Password Solution) is installed"
+ism_controls: ["ISM-1684"]
+maturity_level: 2
+platforms: [windows]
+severity: medium
+check:
+  type: file
+  path: "C:\\Program Files\\LAPS\\CSE\\AdmPwd.dll"
+  operator: exists
+remediation: >
+  Deploy Microsoft LAPS (Local Administrator Password Solution) to manage local administrator account passwords.
+  Download LAPS from: https://www.microsoft.com/en-us/download/details.aspx?id=46899
+  Or use the built-in Windows LAPS available in Windows 11 22H2+ and Server 2022.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview

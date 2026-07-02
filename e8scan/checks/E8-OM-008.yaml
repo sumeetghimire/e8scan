@@ -1,0 +1,18 @@
+id: E8-OM-008
+strategy: configure_office_macros
+title: "Trusted locations for macros restricted (Word)"
+ism_controls: ["ISM-1671"]
+maturity_level: 2
+platforms: [windows]
+severity: medium
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Office\16.0\Word\Security\Trusted Locations'
+  key: alllocationsdisabled
+  expected: 1
+remediation: >
+  Disable all trusted locations via Group Policy to prevent users from bypassing macro security by placing files in trusted directories.
+  Set AllLocationsDisabled = 1 in HKLM\SOFTWARE\Policies\Microsoft\Office\16.0\Word\Security\Trusted Locations.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

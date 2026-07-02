@@ -1,0 +1,25 @@
+id: E8-PA-002
+strategy: patch_applications
+title: "Application patching process — manual verification"
+ism_controls: ["ISM-1493", "ISM-1494"]
+maturity_level: 1
+platforms: [windows, linux, macos]
+severity: high
+check:
+  type: manual
+  guidance: >
+    Verify that a documented application patching process is in place:
+    1. Are critical security patches for applications applied within 48 hours of release?
+    2. Are non-critical patches applied within 2 weeks?
+    3. Is there a software inventory tracking all installed applications and their versions?
+    4. Is unsupported/EOL software removed or isolated?
+    Check patch management tooling: SCCM/MECM, Intune, Jamf, Ansible, etc.
+remediation: >
+  Establish a patch management process:
+  - Maintain an asset/software inventory
+  - Subscribe to vendor security advisories
+  - Test patches in a staging environment before broad deployment
+  - Deploy critical patches within 48 hours (ACSC guidance)
+  - Remove or isolate software that is end-of-life and cannot be patched
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

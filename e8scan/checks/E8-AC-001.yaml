@@ -1,0 +1,23 @@
+id: E8-AC-001
+strategy: application_control
+title: "Windows Defender Application Control (WDAC) policy is active"
+ism_controls: ["ISM-1490", "ISM-1491", "ISM-1492"]
+maturity_level: 1
+platforms: [windows]
+severity: critical
+check:
+  type: command
+  cmd: "powershell -NonInteractive -Command \"$s=(Get-CimInstance -ClassName Win32_DeviceGuard -Namespace root\\Microsoft\\Windows\\DeviceGuard).CodeIntegrityPolicyEnforcementStatus; if($s -eq 2){'Enforced'}elseif($s -eq 1){'Audit'}else{'Not configured'}\""
+  shell: true
+  operator: equals
+  expected: "Enforced"
+  timeout: 30
+remediation: >
+  Deploy and enforce a Windows Defender Application Control (WDAC) policy:
+  1. Create a policy: New-CIPolicy -ScanPath <path> -Level Publisher -FilePath policy.xml
+  2. Convert to binary: ConvertFrom-CIPolicy -XmlFilePath policy.xml -BinaryFilePath policy.p7b
+  3. Deploy via Group Policy or Intune
+  Start in audit mode first, then switch to enforce mode after validation.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/

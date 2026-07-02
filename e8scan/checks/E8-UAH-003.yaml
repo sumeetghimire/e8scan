@@ -1,0 +1,20 @@
+id: E8-UAH-003
+strategy: user_application_hardening
+title: "Internet Explorer / Legacy Edge components are disabled"
+ism_controls: ["ISM-1543"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: command
+  cmd: "powershell -NonInteractive -Command \"(Get-WindowsOptionalFeature -Online -FeatureName Internet-Explorer-Optional-amd64).State\""
+  shell: true
+  operator: contains
+  expected: "Disabled"
+  timeout: 60
+remediation: >
+  Disable Internet Explorer to reduce the legacy attack surface:
+    Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online
+  Consider using the IE Mode in Edge only where strictly required for legacy applications.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

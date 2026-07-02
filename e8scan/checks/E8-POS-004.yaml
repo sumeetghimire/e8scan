@@ -1,0 +1,21 @@
+id: E8-POS-004
+strategy: patch_operating_systems
+title: "macOS is on a supported major release"
+ism_controls: ["ISM-1694"]
+maturity_level: 1
+platforms: [macos]
+severity: high
+check:
+  type: command
+  cmd: "sw_vers -productVersion"
+  shell: true
+  operator: version_gte
+  expected: "13.0"
+  timeout: 10
+remediation: >
+  Upgrade macOS to a currently supported version (macOS 13 Ventura or later).
+  System Settings > General > Software Update.
+  Enable automatic updates to stay current.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://support.apple.com/en-au/macos

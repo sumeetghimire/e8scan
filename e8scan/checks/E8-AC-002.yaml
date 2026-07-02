@@ -1,0 +1,24 @@
+id: E8-AC-002
+strategy: application_control
+title: "AppLocker policy is configured"
+ism_controls: ["ISM-1490", "ISM-1491"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: command
+  cmd: "powershell -NonInteractive -Command \"$rules=Get-AppLockerPolicy -Effective -ErrorAction SilentlyContinue; if($rules -and $rules.RuleCollections.Count -gt 0){'configured'}else{'not configured'}\""
+  shell: true
+  operator: equals
+  expected: "configured"
+  timeout: 30
+remediation: >
+  Configure AppLocker as an alternative or complement to WDAC:
+  1. Open Group Policy Management Editor
+  2. Navigate to: Computer Configuration > Windows Settings > Security Settings > Application Control Policies > AppLocker
+  3. Configure rules for Executable, Windows Installer, Script, and Packaged App rules
+  4. Ensure Application Identity service (AppIDSvc) is running
+  Prefer WDAC over AppLocker for newer deployments (Windows 10 1903+).
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/applocker/

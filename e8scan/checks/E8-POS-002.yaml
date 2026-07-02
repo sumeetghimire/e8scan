@@ -1,0 +1,16 @@
+id: E8-POS-002
+strategy: patch_operating_systems
+title: "Windows Update service is running"
+ism_controls: ["ISM-1694"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: service
+  name: wuauserv
+  expected_state: running
+remediation: >
+  Ensure the Windows Update service (wuauserv) is enabled and running.
+  Run: sc config wuauserv start= auto && net start wuauserv
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

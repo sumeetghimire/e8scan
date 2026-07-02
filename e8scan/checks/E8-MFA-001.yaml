@@ -1,0 +1,22 @@
+id: E8-MFA-001
+strategy: multi_factor_authentication
+title: "MFA is enforced for all users accessing internet-facing services — manual verification"
+ism_controls: ["ISM-1401"]
+maturity_level: 1
+platforms: [windows, linux, macos]
+severity: critical
+check:
+  type: manual
+  guidance: >
+    Verify that MFA is enforced for all user accounts accessing internet-facing services (email, VPN, cloud portals, remote desktop).
+    Check your identity provider (Azure AD / Entra ID, Okta, Duo, etc.) to confirm MFA is required for all users.
+    Users should not be able to bypass MFA via legacy authentication protocols.
+remediation: >
+  Enable MFA for all users on internet-facing services:
+  - Microsoft 365: Azure AD Conditional Access or Security Defaults
+  - AWS: IAM MFA enforcement via SCP
+  - VPN: RADIUS with MFA integration (Duo, Azure MFA, etc.)
+  Disable legacy authentication protocols (Basic Auth, IMAP, POP3) that bypass MFA.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-all-users-mfa

@@ -1,0 +1,21 @@
+id: E8-PA-003
+strategy: patch_applications
+title: "Linux package manager has security updates pending"
+ism_controls: ["ISM-1493"]
+maturity_level: 1
+platforms: [linux]
+severity: high
+check:
+  type: command
+  cmd: "apt-get -s upgrade 2>/dev/null | grep -c '^Inst' || dnf check-update --security -q 2>/dev/null | grep -c '^' || echo 0"
+  shell: true
+  operator: equals
+  expected: "0"
+  timeout: 60
+remediation: >
+  Apply pending security updates:
+    - Debian/Ubuntu: sudo apt update && sudo apt upgrade
+    - RHEL/Fedora: sudo dnf update --security
+  Configure automatic security patching via unattended-upgrades (Debian/Ubuntu) or dnf-automatic (RHEL).
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

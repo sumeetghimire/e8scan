@@ -1,0 +1,21 @@
+id: E8-MFA-002
+strategy: multi_factor_authentication
+title: "MFA is enforced for privileged accounts — manual verification"
+ism_controls: ["ISM-1679"]
+maturity_level: 2
+platforms: [windows, linux, macos]
+severity: critical
+check:
+  type: manual
+  guidance: >
+    Verify that MFA is enforced specifically for privileged accounts (administrators, domain admins, service accounts with elevated rights).
+    Privileged accounts should require phishing-resistant MFA (FIDO2/passkeys, certificate-based, or hardware tokens).
+    Check your IdP policies and confirm no privileged accounts have MFA exceptions.
+remediation: >
+  Enforce phishing-resistant MFA for all privileged accounts:
+  - Azure AD: Conditional Access policy targeting admin roles, require Authentication Strength = Phishing-resistant MFA
+  - On-premises AD: deploy Microsoft Entra MFA or equivalent for privileged accounts
+  - Consider Privileged Identity Management (PIM) for just-in-time privilege elevation with MFA gate
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/howto-conditional-access-policy-admin-mfa

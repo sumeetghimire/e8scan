@@ -1,0 +1,19 @@
+id: E8-UAH-004
+strategy: user_application_hardening
+title: "Windows Defender SmartScreen is enabled for Edge"
+ism_controls: ["ISM-1486"]
+maturity_level: 1
+platforms: [windows]
+severity: medium
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter'
+  key: enabledv9
+  expected: 1
+remediation: >
+  Enable Windows Defender SmartScreen for Microsoft Edge via Group Policy:
+  Computer Configuration > Administrative Templates > Windows Components > Microsoft Edge > Configure Windows Defender SmartScreen = Enabled.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/microsoft-edge/deploy/group-policies/security-privacy-management-gp

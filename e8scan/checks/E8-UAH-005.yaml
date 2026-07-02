@@ -1,0 +1,20 @@
+id: E8-UAH-005
+strategy: user_application_hardening
+title: "PowerShell Script Block Logging is enabled"
+ism_controls: ["ISM-1621"]
+maturity_level: 2
+platforms: [windows]
+severity: medium
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging'
+  key: enablescriptblocklogging
+  expected: 1
+remediation: >
+  Enable PowerShell Script Block Logging via Group Policy:
+  Computer Configuration > Administrative Templates > Windows Components > Windows PowerShell > Turn on PowerShell Script Block Logging = Enabled.
+  This logs all PowerShell scripts to Event ID 4104.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows

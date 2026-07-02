@@ -1,0 +1,19 @@
+id: E8-RAP-002
+strategy: restrict_admin_privileges
+title: "Current user is not running with a built-in administrator account"
+ism_controls: ["ISM-1507"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: command
+  cmd: "whoami /groups | findstr /i \"S-1-5-32-544\" | findstr /i \"Enabled\""
+  shell: true
+  operator: exit_code
+  expected: 1
+  timeout: 15
+remediation: >
+  The current user has active administrator group membership. For day-to-day tasks, use a standard (non-admin) account.
+  Create a separate admin account for elevation only, and use that account only for administrative tasks.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

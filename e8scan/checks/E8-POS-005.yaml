@@ -1,0 +1,20 @@
+id: E8-POS-005
+strategy: patch_operating_systems
+title: "Linux unattended security upgrades are configured"
+ism_controls: ["ISM-1694", "ISM-1695"]
+maturity_level: 2
+platforms: [linux]
+severity: medium
+check:
+  type: file
+  path: /etc/apt/apt.conf.d/20auto-upgrades
+  operator: contains
+  expected: "APT::Periodic::Unattended-Upgrade"
+remediation: >
+  Install and configure unattended-upgrades:
+    sudo apt install unattended-upgrades
+    sudo dpkg-reconfigure --priority=low unattended-upgrades
+  On RHEL/Fedora: configure dnf-automatic with security-only updates.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://wiki.debian.org/UnattendedUpgrades

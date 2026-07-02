@@ -1,0 +1,22 @@
+id: E8-AC-003
+strategy: application_control
+title: "Application control on macOS — Gatekeeper is enabled"
+ism_controls: ["ISM-1490"]
+maturity_level: 1
+platforms: [macos]
+severity: high
+check:
+  type: command
+  cmd: "spctl --status"
+  shell: true
+  operator: contains
+  expected: "assessments enabled"
+  timeout: 10
+remediation: >
+  Enable Gatekeeper to restrict application execution to signed and notarized apps:
+    sudo spctl --master-enable
+  Also consider setting it to require App Store only:
+    sudo defaults write /Library/Preferences/com.apple.security GKAutoRearm -bool true
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://support.apple.com/en-au/guide/security/sec5599b66df/web

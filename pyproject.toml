@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "e8scan"
+version = "0.1.0"
+description = "Cross-platform CLI tool to scan machine configuration against the ACSC Essential Eight mitigation strategies"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "e8scan contributors" }]
+requires-python = ">=3.10"
+keywords = ["security", "essential-eight", "acsc", "compliance", "australia", "ism"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "PyYAML>=6.0",
+]
+
+[project.scripts]
+e8scan = "e8scan.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/your-org/e8scan"
+Repository = "https://github.com/your-org/e8scan"
+Issues = "https://github.com/your-org/e8scan/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["e8scan*"]
+
+[tool.setuptools.package-data]
+e8scan = ["checks/*.yaml"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short"
+
+[tool.coverage.run]
+source = ["e8scan"]
+omit = ["tests/*"]

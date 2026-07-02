@@ -1,0 +1,20 @@
+id: E8-POS-001
+strategy: patch_operating_systems
+title: "Windows automatic updates are enabled"
+ism_controls: ["ISM-1694", "ISM-1695"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+  key: nonautomaticupdates
+  expected: 0
+remediation: >
+  Enable Windows automatic updates via Group Policy:
+  Computer Configuration > Administrative Templates > Windows Components > Windows Update > Configure Automatic Updates.
+  Set to Enabled (value 4 = auto download and install).
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings

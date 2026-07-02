@@ -1,0 +1,19 @@
+id: E8-OM-002
+strategy: configure_office_macros
+title: "Office macros from the internet are blocked (Excel)"
+ism_controls: ["ISM-1671", "ISM-1488"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Office\16.0\Excel\Security'
+  key: blockcontentexecutionfrominternet
+  expected: 1
+remediation: >
+  Enable "Block macros from running in Office files from the Internet" via Group Policy for Excel.
+  User Configuration > Administrative Templates > Microsoft Excel 2016 > Excel Options > Security > Trust Center.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/deployoffice/security/internet-macros-blocked

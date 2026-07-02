@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }} / Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install -e "."
+          pip install pytest pytest-mock pytest-cov ruff mypy
+
+      - name: Lint with ruff
+        run: ruff check .
+
+      - name: Type check with mypy
+        run: mypy e8scan/
+
+      - name: Run tests
+        run: pytest --cov=e8scan --cov-report=term-missing --cov-fail-under=80
+
+      - name: Smoke test — list-checks
+        run: e8scan list-checks
+
+      - name: Smoke test — scan terminal
+        run: e8scan scan --format terminal || true
+        # Exit code 1 is expected on non-compliant machines

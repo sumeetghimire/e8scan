@@ -1,0 +1,20 @@
+id: E8-OM-001
+strategy: configure_office_macros
+title: "Office macros from the internet are blocked (Word)"
+ism_controls: ["ISM-1671", "ISM-1488"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Office\16.0\Word\Security'
+  key: blockcontentexecutionfrominternet
+  expected: 1
+remediation: >
+  Enable "Block macros from running in Office files from the Internet" via Group Policy:
+  User Configuration > Administrative Templates > Microsoft Word 2016 > Word Options > Security > Trust Center.
+  Set "Block macros from running in Office files from the Internet" to Enabled.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/deployoffice/security/internet-macros-blocked

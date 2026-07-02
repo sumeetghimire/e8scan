@@ -1,0 +1,18 @@
+id: E8-OM-007
+strategy: configure_office_macros
+title: "Macro execution is logged via Office Telemetry / audit log"
+ism_controls: ["ISM-1705"]
+maturity_level: 3
+platforms: [windows]
+severity: medium
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Office\16.0\OSM'
+  key: enablelogging
+  expected: 1
+remediation: >
+  Enable Office Telemetry logging via Group Policy to capture macro execution events.
+  Computer Configuration > Administrative Templates > Microsoft Office 2016 > Telemetry Dashboard > Turn on telemetry data collection.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

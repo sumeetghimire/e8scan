@@ -1,0 +1,19 @@
+id: E8-RAP-004
+strategy: restrict_admin_privileges
+title: "Privileged access workstation (PAW) policy — manual verification"
+ism_controls: ["ISM-1507", "ISM-1508"]
+maturity_level: 3
+platforms: [windows, linux, macos]
+severity: medium
+check:
+  type: manual
+  guidance: >
+    Verify that privileged accounts (Domain Admins, local admins) are only used from dedicated Privileged Access Workstations (PAWs).
+    PAWs must be separate from standard workstations, not used for email/web browsing.
+    Check: Do your administrators use separate accounts and separate devices for privileged tasks?
+remediation: >
+  Implement a Privileged Access Workstation (PAW) model. Assign privileged users a dedicated workstation
+  used only for administrative tasks, not for email, web browsing or productivity.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/security/privileged-access-workstations/privileged-access-devices

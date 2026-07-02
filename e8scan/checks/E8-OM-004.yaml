@@ -1,0 +1,19 @@
+id: E8-OM-004
+strategy: configure_office_macros
+title: "Office macros disabled without notification (Word)"
+ism_controls: ["ISM-1489"]
+maturity_level: 2
+platforms: [windows]
+severity: high
+check:
+  type: registry
+  hive: HKLM
+  path: 'SOFTWARE\Policies\Microsoft\Office\16.0\Word\Security'
+  key: vbawarnings
+  expected: 4
+remediation: >
+  Set VBA macro notifications to "Disable all macros without notification" via Group Policy.
+  Set the VBAWarnings registry value to 4 (Disable all without notification).
+  User Configuration > Administrative Templates > Microsoft Word 2016 > Word Options > Security > Trust Center > VBA Macro Notification Settings.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

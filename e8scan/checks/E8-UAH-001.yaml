@@ -1,0 +1,22 @@
+id: E8-UAH-001
+strategy: user_application_hardening
+title: "PowerShell v2 is disabled or removed"
+ism_controls: ["ISM-1621", "ISM-1622"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: command
+  cmd: "powershell -NonInteractive -Command \"(Get-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root).State\""
+  shell: true
+  operator: contains
+  expected: "Disabled"
+  timeout: 60
+remediation: >
+  Disable PowerShell v2 to prevent downgrade attacks that bypass Script Block Logging and AMSI:
+    Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root
+  Or via DISM:
+    dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2Root
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/wmf/whats-new/new-updated-psv5

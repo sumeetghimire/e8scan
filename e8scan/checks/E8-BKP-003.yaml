@@ -1,0 +1,26 @@
+id: E8-BKP-003
+strategy: regular_backups
+title: "Backup retention and testing policy — manual verification"
+ism_controls: ["ISM-1511", "ISM-1512", "ISM-1515"]
+maturity_level: 2
+platforms: [windows, linux, macos]
+severity: high
+check:
+  type: manual
+  guidance: >
+    Verify that:
+    1. Backups are taken at least daily for important data.
+    2. Backups are stored in at least 3 locations (3-2-1 rule): primary, secondary, and off-site/cloud.
+    3. Backups are tested for restorability at least quarterly.
+    4. Backup media is protected from ransomware (immutable storage or offline/air-gapped).
+    5. Recovery time and recovery point objectives are documented and tested.
+remediation: >
+  Implement a comprehensive backup strategy following the 3-2-1 rule:
+  - 3 copies of data
+  - 2 different storage media types
+  - 1 off-site or cloud copy
+  Use immutable backup storage (e.g., Veeam with object lock, Azure Backup, AWS Backup with vault lock)
+  to protect against ransomware that targets backups.
+  Schedule and document regular restore tests.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

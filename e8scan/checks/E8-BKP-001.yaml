@@ -1,0 +1,18 @@
+id: E8-BKP-001
+strategy: regular_backups
+title: "Volume Shadow Copy Service (VSS) is running (Windows)"
+ism_controls: ["ISM-1511", "ISM-1515"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: service
+  name: VSS
+  expected_state: running
+remediation: >
+  Ensure the Volume Shadow Copy Service is enabled and running to support system restore points and backup operations.
+  Run: sc config VSS start= demand && net start VSS
+  Consider enabling System Protection / Shadow Copies on all drives with important data.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/windows-server/storage/file-server/volume-shadow-copy-service

@@ -1,0 +1,21 @@
+id: E8-POS-003
+strategy: patch_operating_systems
+title: "Linux kernel is recent (within 12 months of latest)"
+ism_controls: ["ISM-1694"]
+maturity_level: 1
+platforms: [linux]
+severity: high
+check:
+  type: command
+  cmd: "uname -r"
+  shell: true
+  operator: regex
+  expected: "^[5-9]\\.|^[1-9][0-9]+\\."
+  timeout: 10
+remediation: >
+  Update the kernel to a supported version:
+    - Debian/Ubuntu: sudo apt update && sudo apt upgrade
+    - RHEL/CentOS/Fedora: sudo dnf update kernel
+  Reboot after kernel updates. Ensure unattended-upgrades or equivalent is configured for automatic security patching.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight

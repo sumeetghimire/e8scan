@@ -1,0 +1,23 @@
+id: E8-PA-001
+strategy: patch_applications
+title: "Microsoft Defender Antivirus definitions are up to date"
+ism_controls: ["ISM-1494"]
+maturity_level: 1
+platforms: [windows]
+severity: high
+check:
+  type: command
+  cmd: "powershell -NonInteractive -Command \"$status=Get-MpComputerStatus | ConvertTo-Json; $status\""
+  shell: true
+  operator: jsonpath
+  jsonpath_field: "AntivirusSignatureAge"
+  expected: 1
+  timeout: 30
+remediation: >
+  Update Microsoft Defender Antivirus definitions:
+    Update-MpSignature
+  Ensure real-time protection and automatic definition updates are enabled via Group Policy or Intune.
+  Consider enabling cloud-delivered protection for near-real-time updates.
+references:
+  - https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight
+  - https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/manage-updates-baselines-microsoft-defender-antivirus
