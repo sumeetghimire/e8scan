@@ -202,9 +202,10 @@ def test_command_runner_command_not_found() -> None:
 
 def test_command_runner_timeout() -> None:
     from e8scan.runners.command import run
+    cmd = "sleep 10" if sys.platform != "win32" else "powershell -Command Start-Sleep -Seconds 10"
     check = make_check({
         "type": "command",
-        "cmd": "sleep 10" if sys.platform != "win32" else "timeout 10",
+        "cmd": cmd,
         "shell": True,
         "operator": "equals",
         "expected": "anything",
@@ -217,14 +218,20 @@ def test_command_runner_timeout() -> None:
 
 def test_command_runner_platform_dict_cmd() -> None:
     from e8scan.runners.command import run
-    plat = "windows" if sys.platform == "win32" else ("macos" if sys.platform == "darwin" else "linux")
+    # Each platform echoes a unique string; expected matches what that platform outputs
+    if sys.platform == "win32":
+        expected = "win"
+    elif sys.platform == "darwin":
+        expected = "mac"
+    else:
+        expected = "linux"
     cmd_dict = {"windows": "echo win", "linux": "echo linux", "macos": "echo mac"}
     check = make_check({
         "type": "command",
         "cmd": cmd_dict,
         "shell": True,
         "operator": "contains",
-        "expected": plat if plat != "macos" else "mac",
+        "expected": expected,
     })
     result = run(check)
     assert result.status == ResultStatus.PASS
