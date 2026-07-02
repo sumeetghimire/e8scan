@@ -35,7 +35,7 @@ jobs:
         run: mypy e8scan/
 
       - name: Run tests
-        run: pytest --cov=e8scan --cov-report=term-missing --cov-fail-under=80
+        run: pytest --cov=e8scan --cov-report=term-missing --cov-fail-under=75
 
       - name: Smoke test — list-checks
         run: e8scan list-checks

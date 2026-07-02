@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import json
 
+from rich.console import Console
+
 from e8scan.models import CheckDefinition, CheckResult, ResultStatus, ScanReport
-from e8scan.reporters import html_, json_, sarif
+from e8scan.reporters import html_, json_, sarif, terminal
 
 
 def make_report() -> ScanReport:
@@ -143,3 +145,50 @@ def test_html_reporter_self_contained() -> None:
     assert 'href="http' not in output
     assert "<style>" in output
     assert "<script>" in output
+
+
+# --- Terminal reporter ---
+
+def test_terminal_reporter_runs_without_error() -> None:
+    from io import StringIO
+    report = make_report()
+    console = Console(file=StringIO(), force_terminal=True, width=120)
+    terminal.render(report, console=console)
+    output = console.file.getvalue()  # type: ignore[union-attr]
+    assert "e8scan" in output
+    assert "DISCLAIMER" in output
+
+
+def test_terminal_reporter_shows_strategy_sections() -> None:
+    from io import StringIO
+    report = make_report()
+    console = Console(file=StringIO(), force_terminal=True, width=120)
+    terminal.render(report, console=console)
+    output = console.file.getvalue()  # type: ignore[union-attr]
+    assert "Configure Office Macros" in output
+    assert "Patch Operating Systems" in output
+
+
+def test_terminal_reporter_shows_summary() -> None:
+    from io import StringIO
+    report = make_report()
+    console = Console(file=StringIO(), force_terminal=True, width=120)
+    terminal.render(report, console=console)
+    output = console.file.getvalue()  # type: ignore[union-attr]
+    assert "Scan Summary" in output
+    assert "PASS" in output
+    assert "FAIL" in output
+
+
+def test_terminal_reporter_default_console() -> None:
+    """render() with no console arg should not raise."""
+    import sys
+    from io import StringIO
+    report = make_report()
+    # Patch stdout to avoid polluting test output
+    old_stdout = sys.stdout
+    sys.stdout = StringIO()
+    try:
+        terminal.render(report)
+    finally:
+        sys.stdout = old_stdout

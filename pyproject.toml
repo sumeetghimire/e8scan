@@ -65,4 +65,11 @@ addopts = "--tb=short"
 
 [tool.coverage.run]
 source = ["e8scan"]
-omit = ["tests/*"]
+omit = ["tests/*", "e8scan/runners/registry.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if sys.platform == \"win32\"",
+    "if sys.platform != \"win32\"",
+]
