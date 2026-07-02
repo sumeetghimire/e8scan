@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import platform
 
-import pytest
-
 from e8scan.models import (
     CheckDefinition,
     CheckResult,

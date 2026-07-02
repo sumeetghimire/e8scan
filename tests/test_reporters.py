@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 
 from e8scan.models import CheckDefinition, CheckResult, ResultStatus, ScanReport
-from e8scan.reporters import json_, sarif, html_
+from e8scan.reporters import html_, json_, sarif
 
 
 def make_report() -> ScanReport:

@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from e8scan.engine import validate_check_dict, VALID_STRATEGIES, VALID_CHECK_TYPES, REQUIRED_FIELDS
+from e8scan.engine import REQUIRED_FIELDS, VALID_CHECK_TYPES, VALID_STRATEGIES, validate_check_dict
 
 
 def get_bundled_yaml_files() -> list[Path]:

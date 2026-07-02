@@ -15,7 +15,6 @@ from e8scan.engine import (
 )
 from e8scan.models import CheckDefinition
 
-
 VALID_CHECK = {
     "id": "E8-TST-001",
     "strategy": "configure_office_macros",
