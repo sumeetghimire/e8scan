@@ -1,9 +1,10 @@
 # e8scan
 
-[![CI](https://github.com/your-org/e8scan/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/e8scan/actions/workflows/ci.yml)
+[![CI](https://github.com/sumeetghimire/e8scan/actions/workflows/ci.yml/badge.svg)](https://github.com/sumeetghimire/e8scan/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/e8scan)](https://pypi.org/project/e8scan/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![Python](https://img.shields.io/pypi/pyversions/e8scan)](https://pypi.org/project/e8scan/)
+[![Coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)](https://github.com/sumeetghimire/e8scan/actions/workflows/ci.yml)
 
 **Cross-platform CLI tool that scans your machine's configuration against the Australian ACSC Essential Eight mitigation strategies and maps every check to official ISM (Information Security Manual) control IDs.**
 

@@ -89,7 +89,7 @@ def render(report: ScanReport) -> str:
                     "driver": {
                         "name": "e8scan",
                         "version": __version__,
-                        "informationUri": "https://github.com/your-org/e8scan",
+                        "informationUri": "https://github.com/sumeetghimire/e8scan",
                         "organization": "e8scan contributors",
                         "rules": rules,
                         "properties": {
