@@ -22,9 +22,18 @@ e8scan fills that gap: it runs **real checks** against your system configuration
 
 ## Install
 
+**macOS / Linux**
 ```bash
 pip install e8scan
 ```
+
+**Windows**
+```powershell
+pip install pipx
+python -m pipx install e8scan
+python -m pipx ensurepath
+```
+Then restart your terminal and run `e8scan scan`.
 
 Requires Python 3.10+. No heavy dependencies — just `typer`, `rich`, and `PyYAML`.
 
